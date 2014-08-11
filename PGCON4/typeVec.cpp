@@ -1,7 +1,7 @@
 #include<iostream>
 #include<string>
 
-#include<conio.h>//ÉLÅ[ì¸óÕ
+#include<conio.h>//for
 #include<time.h>//éûä‘åvë™
 
 #include<vector>
@@ -36,12 +36,12 @@ void main()
 		string input;
 		int inputNum;
 
-		cout << "Enter the number of strings" << endl;
+		cout << "Enter the NUMBER of strings" << endl;
 		cin >> inputNum;
 
 		vector<string> inputList(inputNum, input);
 
-		cout << "Enter the string" << endl;
+		cout << "Enter the strings" << endl;
 		for (int n = 0; n < inputNum; ++n)
 		{
 			cin >> input;
@@ -54,17 +54,17 @@ void main()
 			int iSize = inputList[iNum].size();
 			int answer = iSize;
 
-			string keyList(iSize, 0);
-			string keyScan(iSize, 0);
-			vector< vector<int> > indexList(iSize, vector<int>(iSize, 0));
+			string keyList(iSize, 0);//for listing each type of character.
+			string keyScan(iSize, 0);//for filtering the target key.
+			vector< vector<int> > indexList(iSize, vector<int>(iSize, 0));//list of each character's position.
 
 			int keyN = 0;
 			for (int i = 0; i < iSize; ++i)
 			{
-				key = inputList[iNum][i];
+				key = inputList[iNum][i];//pickup one char from the input.
 				if (keyList.find(key) == string::npos)
 				{
-					keyScan = inputList[iNum];
+					keyScan = inputList[iNum];//input -> filter
 					replace_if(keyScan.begin(), keyScan.end(), isn_key, 0);
 					replace_if(keyScan.begin(), keyScan.end(), is_key, 1);
 					copy(keyScan.begin(), keyScan.end(), indexList[keyN].begin());
@@ -83,21 +83,22 @@ void main()
 						is_odd(num) ? ++oddKey : 0;
 					}
 					(oddKey <= 1) ? ++answer : 0;
-					//cout << ( (oddKey<=1) ? " :OK " : " :- " );
-					//cout << endl;
+
+					//for (int l = j; l <= j + segment; ++l)
+					//{
+					//	cout << inputList[iNum][l];
+					//}
+					//cout << ( (oddKey<=1) ? " :is anagram " : " :- " ) << endl;
 				}
 			}
 			cout << "Number of anagram is " << answer << endl;
 		}
 		finish = clock();
-		cout << " time: " << finish - start << endl;
+		double time = (double)(finish - start)/CLOCKS_PER_SEC;
+		cout << " time: " << time << endl;
 
 		getchar();
-		cout << "Continue: press Enter key / Exit: press Esc key" << endl;
-		while (1)
-		{
-			if (_getch() == 0x1B ) return;
-			if (_getch() == 0x0D ) break;
-		}
+		cout << "Continue: press Any key / Exit: press Esc key" << endl<<endl;
+		escape = ((_getch() == 0x1B) ? true : false) ;
 	}
 }
