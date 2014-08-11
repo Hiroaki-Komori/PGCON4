@@ -1,7 +1,7 @@
 #include<iostream>
 #include<string>
 
-#include<conio.h>//for
+#include<conio.h>//コマンド入力
 #include<time.h>//時間計測
 
 #include<vector>
