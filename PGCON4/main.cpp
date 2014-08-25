@@ -24,22 +24,16 @@ bool is_odd(int val)
 
 int main()
 {
-	string input;
 	int inputNum;
-
 	cin >> inputNum;
 
-	vector<string> inputList(inputNum, input);
 
 	for (int n = 0; n < inputNum; ++n)
 	{
+	    string input;
 		cin >> input;
-		inputList[n] = input;
-	}
 
-	for (int iNum = 0; iNum < inputNum; ++iNum)
-	{
-		int iSize = inputList[iNum].size();
+		int iSize = input.size();
 		int answer = iSize;
 
 		string keyList(iSize, 0);//for listing each type of character.
@@ -49,12 +43,12 @@ int main()
 		int keyN = 0;
 		for (int i = 0; i < iSize; ++i)
 		{
-			char key = inputList[iNum][i];//pickup one char from the input.
+			char key = input[i];//pickup one char from the input.
 			is_key is_key_func(key);
 			is_not_key is_not_key_func(key);
 			if (keyList.find(key) == string::npos)
 			{
-				keyScan = inputList[iNum];//input -> filter
+				keyScan = input;//input -> filter
 				replace_if(keyScan.begin(), keyScan.end(), is_not_key_func, 0);
 				replace_if(keyScan.begin(), keyScan.end(), is_key_func, 1);
 				copy(keyScan.begin(), keyScan.end(), indexList[keyN].begin());
