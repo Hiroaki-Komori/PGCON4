@@ -5,17 +5,17 @@
 
 using namespace std;
 
-char key;
+struct is_key : public std::unary_function<bool, char> {
+    char key_;
+    is_key(char key) : key_(key) {}
+    bool operator()(char target) { return key_ == target; }
+};
 
-bool is_key(char tgt)
-{
-	return tgt == key;
-}
-
-bool isn_key(char tgt)
-{
-	return tgt != key;
-}
+struct is_not_key : public std::unary_function<bool, char> {
+    char key_;
+    is_not_key(char key) : key_(key) {}
+    bool operator()(char target) { return key_ != target; }
+};
 
 bool is_odd(int val)
 {
@@ -49,12 +49,14 @@ int main()
 		int keyN = 0;
 		for (int i = 0; i < iSize; ++i)
 		{
-			key = inputList[iNum][i];//pickup one char from the input.
+			char key = inputList[iNum][i];//pickup one char from the input.
+			is_key is_key_func(key);
+			is_not_key is_not_key_func(key);
 			if (keyList.find(key) == string::npos)
 			{
 				keyScan = inputList[iNum];//input -> filter
-				replace_if(keyScan.begin(), keyScan.end(), isn_key, 0);
-				replace_if(keyScan.begin(), keyScan.end(), is_key, 1);
+				replace_if(keyScan.begin(), keyScan.end(), is_not_key_func, 0);
+				replace_if(keyScan.begin(), keyScan.end(), is_key_func, 1);
 				copy(keyScan.begin(), keyScan.end(), indexList[keyN].begin());
 				keyList[keyN] = key;
 				++keyN;
