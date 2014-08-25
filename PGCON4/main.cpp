@@ -11,12 +11,6 @@ struct is_key : public std::unary_function<bool, char> {
     bool operator()(char target) { return key_ == target; }
 };
 
-struct is_not_key : public std::unary_function<bool, char> {
-    char key_;
-    is_not_key(char key) : key_(key) {}
-    bool operator()(char target) { return key_ != target; }
-};
-
 bool is_odd(int val)
 {
 	return val & 1;
@@ -51,7 +45,7 @@ int main()
 			for (int j = 0; j < iSize - segment; ++j)
 			{
 				int oddKey = 0;
-				for (int k = 0; k < keyN; ++k)
+				for (int k = 0; k < keyN && oddKey <= 1; ++k)
 				{
 				    is_key is_key_func(keyList[k]);
 					int num = count_if(input.begin() + j, input.begin() + j + segment + 1, is_key_func);
