@@ -22,7 +22,7 @@ bool is_odd(int val)
 	return val & 1;
 }
 
-void main()
+int main()
 {
 	string input;
 	int inputNum;
@@ -75,4 +75,5 @@ void main()
 		}
 		cout << answer << endl;
 	}
+return 0;
 }
