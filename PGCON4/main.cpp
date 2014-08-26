@@ -21,6 +21,13 @@ int main()
 	int inputNum;
 	cin >> inputNum;
 
+	std::vector<is_key> is_key_list;
+    const size_t KEY_N = 26;
+    for (int i = 0; i < KEY_N; ++i)
+    {
+        is_key_list.push_back(is_key('a' + i));
+    }
+
 	for (int n = 0; n < inputNum; ++n)
 	{
 	    string input;
@@ -29,26 +36,14 @@ int main()
 		size_t iSize = input.length();
         int answer = iSize;
 
-		string keyList(iSize, 0);//for listing each type of character.
-		int keyN = 0;
-		for (int i = 0; i < iSize; ++i)
-		{
-			char key = input[i];//pickup one char from the input.
-			if (keyList.find(key) == string::npos)
-			{
-				keyList[keyN] = key;
-				++keyN;
-			}
-		}
 		for (int segment = 1; segment < iSize; ++segment)
 		{
 			for (int j = 0; j < iSize - segment; ++j)
 			{
 				int oddKey = 0;
-				for (int k = 0; k < keyN && oddKey <= 1; ++k)
+				for (int k = 0; k < KEY_N && oddKey <= 1; ++k)
 				{
-				    is_key is_key_func(keyList[k]);
-					int num = count_if(input.begin() + j, input.begin() + j + segment + 1, is_key_func);
+					int num = count_if(input.begin() + j, input.begin() + j + segment + 1, is_key_list[k]);
 					is_odd(num) ? ++oddKey : 0;
 				}
 				(oddKey <= 1) ? ++answer : 0;
@@ -56,5 +51,5 @@ int main()
 		}
 		cout << answer << endl;
 	}
-return 0;
+	return 0;
 }
